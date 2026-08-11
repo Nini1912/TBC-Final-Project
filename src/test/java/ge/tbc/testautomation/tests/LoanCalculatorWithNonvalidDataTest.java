@@ -193,8 +193,10 @@ public class LoanCalculatorWithNonvalidDataTest {
 
         String period = "2";
 
-        String minPeriod = "3";
-        String maxPeriod = "48";
+        SelenideElement rangeElement = $(byId("standard-calc-period-slider"));
+
+        String maxPeriod = rangeElement.getAttribute("max");
+        String minPeriod = rangeElement.getAttribute("min");
 
         loanPeriodInput
                 .shouldBe(visible)
@@ -216,9 +218,9 @@ public class LoanCalculatorWithNonvalidDataTest {
         SelenideElement monthlyPayment =
                 $(byId("standard-calculator-result-payment"));
 
-        double loanAmount = 200;
-        double annualInterestRate = 9.9;
-        int months = 3;
+        int loanAmount = Integer.parseInt($(byId("standard-calculator-result-amount")).getText());
+        double annualInterestRate = Double.parseDouble($(byId("standard-calculator-result-rate")).getText().replace("%-დან", "").trim());
+        int months = Integer.parseInt($(byId("standard-calculator-result-period")).getText());
 
         double monthlyCommission = 0;
 

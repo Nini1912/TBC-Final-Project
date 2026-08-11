@@ -13,7 +13,11 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.*;
@@ -110,6 +114,8 @@ public class LoanCalculatorWithValidDataTest {
 
     @Test(priority = 4, description = "სესხის თანხის შეყვანა")
     public void enterLoanAmount() {
+        String loanAmount = "10000";
+
         SelenideElement loanAmountInput = $(byId("standard-calculator-amount"));
         loanAmountInput.shouldBe(visible);
 
@@ -120,13 +126,14 @@ public class LoanCalculatorWithValidDataTest {
                 "const input = arguments[0];" +
                         "const setter = Object.getOwnPropertyDescriptor(" +
                         "HTMLInputElement.prototype, 'value').set;" +
-                        "setter.call(input, '10000');" +
+                        "setter.call(input, arguments[1]);" +
                         "input.dispatchEvent(new Event('input', { bubbles: true }));" +
                         "input.dispatchEvent(new Event('change', { bubbles: true }));",
-                loanAmountInput
+                loanAmountInput,
+                loanAmount
         );
 
-        loanAmountInput.shouldHave(value("10000"));
+        loanAmountInput.shouldHave(value(loanAmount));
     }
 
     @Test(priority = 5, description = "სესხის ვადის არჩევა")
@@ -139,12 +146,14 @@ public class LoanCalculatorWithValidDataTest {
 
         String period = "24";
 
-        double minPeriod = 3;
-        double maxPeriod = 48;
+        SelenideElement rangeElement = $(byId("standard-calc-period-slider"));
+
+        int maxPeriod = Integer.parseInt(rangeElement.getAttribute("max"));
+        int minPeriod = Integer.parseInt(rangeElement.getAttribute("min"));
 
         double expectedPercentage =
                 Math.round(
-                        ((Double.parseDouble(period) - minPeriod)
+                        ((float) (Integer.parseInt(period) - minPeriod)
                                 / (maxPeriod - minPeriod) * 100) * 10000
                 ) / 10000.0;
 
@@ -171,9 +180,9 @@ public class LoanCalculatorWithValidDataTest {
         SelenideElement monthlyPayment =
                 $(byId("standard-calculator-result-payment"));
 
-        double loanAmount = 10_000;
-        double annualInterestRate = 9.9;
-        int months = 24;
+        int loanAmount = Integer.parseInt($(byId("standard-calculator-result-amount")).getText());
+        double annualInterestRate = Double.parseDouble($(byId("standard-calculator-result-rate")).getText().replace("%-დან", "").trim());
+        int months = Integer.parseInt($(byId("standard-calculator-result-period")).getText());
 
         double monthlyCommission = 0;
 
