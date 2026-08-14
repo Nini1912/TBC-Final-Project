@@ -17,7 +17,6 @@ public class LocationsPage extends CommonPage{
             $(byTagAndText("div", "აირჩიე ქალაქი"))
                     .parent()
                     .parent();
-
     public SelenideElement citySearch = $(byAttribute("placeholder", "Filter regions"));
     public SelenideElement emptyState = $(".tbcx-dropdown-popover__empty-state");
     public SelenideElement locationSearch = $(byAttribute("placeholder", "მიუთითე სასურველი ლოკაცია"));

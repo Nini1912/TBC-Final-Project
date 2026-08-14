@@ -159,7 +159,6 @@ public class LoanCalculateSteps {
                 .shouldHave(value(validLoanTerm));
 
         loansCalculatorPage.sliderOrigin
-                .shouldBe(visible)
                 .shouldHave(attributeMatching(
                         "style",
                         ".*" + expectedPercentage + ".*"

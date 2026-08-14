@@ -9,15 +9,10 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class CurrencyCalculatorPage extends CommonPage {
     public ElementsCollection currencyDropdowns = $$("button.currency-dropdown__trigger");
-
     public ElementsCollection currenciesList = $$("li.currency-dropdown__item");
-
     public SelenideElement amountInput = $(byId("sell-amount"));
-
     public SelenideElement exchangeRateElement = $("p.exchange-rates-calculator__description");
-
     public SelenideElement sellAmount = $(byId("sell-amount"));
-
     public SelenideElement buyAmount = $(byId("buy-amount"));
 }
 

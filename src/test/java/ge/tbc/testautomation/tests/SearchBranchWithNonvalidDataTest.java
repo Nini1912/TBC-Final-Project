@@ -13,14 +13,12 @@ import static ge.tbc.testautomation.data.Constants.*;
 
 @Description("SCRUM-T7")
 public class SearchBranchWithNonvalidDataTest extends BaseTest {
-    AcceptCookiesSteps acceptCookiesSteps;
     NavigationSteps navigationSteps;
     BurgerMenuSteps burgerMenuSteps;
     LocationsSearchSteps locationsSearchSteps;
 
     @BeforeClass
     public void innerSetUp() {
-        acceptCookiesSteps = new AcceptCookiesSteps();
         navigationSteps = new NavigationSteps();
         burgerMenuSteps = new BurgerMenuSteps();
         locationsSearchSteps = new LocationsSearchSteps();
@@ -31,7 +29,6 @@ public class SearchBranchWithNonvalidDataTest extends BaseTest {
             description = "მისამართების გვერდზე გადასვლა"
     )
     public void navigateToAddressesPage() {
-        acceptCookiesSteps.acceptCookies();
         if (isMobile) {
             burgerMenuSteps.openBurgerMenu()
                     .navigateToPage(LOCATIONS_TEXT)
@@ -43,17 +40,16 @@ public class SearchBranchWithNonvalidDataTest extends BaseTest {
         }
     }
 
-    @Retry(count = 2)
     @Test(
             priority = 2,
             description = "'ფილიალები' ტაბის არჩევა"
     )
     public void selectBranchesTab() {
+        acceptCookiesSteps.acceptCookiesOnNewTab();
         locationsSearchSteps.selectBranchesTab()
                 .validateTabIsActive(BRANCHES_INACTIVE_ERROR_MESSAGE);
     }
 
-    @Retry(count = 2)
     @Test(
             priority = 3,
             description = "ქალაქის ძებნა არარსებული მონაცემით"
@@ -63,7 +59,6 @@ public class SearchBranchWithNonvalidDataTest extends BaseTest {
                 .validateCityNotFound(NOT_FOUND_MESSAGE);
     }
 
-    @Retry(count = 2)
     @Test(
             priority = 4,
             description = "ლოკაციის არჩევა"

@@ -2,9 +2,11 @@ package ge.tbc.testautomation.tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
+import ge.tbc.testautomation.steps.AcceptCookiesSteps;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
@@ -14,7 +16,8 @@ import static ge.tbc.testautomation.data.Constants.MOBILE_RESOLUTION;
 
 public class BaseTest {
     protected boolean isMobile;
-    
+    AcceptCookiesSteps acceptCookiesSteps;
+
     @BeforeClass
     @Parameters("resolution")
     public void setUp(String resolution) {
@@ -36,6 +39,12 @@ public class BaseTest {
                         Integer.parseInt(dimensions[0]),
                         Integer.parseInt(dimensions[1])
                 ));
+        acceptCookiesSteps = new AcceptCookiesSteps();
+    }
+
+    @BeforeMethod
+    public void methodSetUp(){
+        acceptCookiesSteps.acceptCookies();
     }
 
     @AfterClass

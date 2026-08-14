@@ -12,20 +12,17 @@ import org.testng.annotations.Test;
 import static ge.tbc.testautomation.data.Constants.*;
 
 public class TbcCardOrderStartTest extends BaseTest {
-    AcceptCookiesSteps acceptCookiesSteps;
     NavigationSteps navigationSteps;
     BurgerMenuSteps burgerMenuSteps;
     OrderCardSteps orderCardSteps;
 
     @BeforeClass
     public void innerSetUp() {
-        acceptCookiesSteps = new AcceptCookiesSteps();
         navigationSteps = new NavigationSteps();
         burgerMenuSteps = new BurgerMenuSteps();
         orderCardSteps = new OrderCardSteps();
     }
 
-    @Retry(count = 2)
     @Test(
             priority = 1,
             description = "თიბისი ბარათის გვერდზე გადასვლა"
@@ -33,7 +30,6 @@ public class TbcCardOrderStartTest extends BaseTest {
 //            dataProviderClass = LinkDataProvider.class
     )
     public void navigateToTbcCardPage() {
-        acceptCookiesSteps.acceptCookies();
         if (isMobile) {
             burgerMenuSteps.openBurgerMenu()
                     .navigateToPage("ბარათები")
@@ -46,7 +42,6 @@ public class TbcCardOrderStartTest extends BaseTest {
         }
     }
 
-    @Retry(count = 2)
     @Test(
             priority = 2,
             description = "ბარათის აღების დაწყება"

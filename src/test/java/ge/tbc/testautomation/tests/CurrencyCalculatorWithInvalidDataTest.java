@@ -10,14 +10,12 @@ import org.testng.annotations.Test;
 import static ge.tbc.testautomation.data.Constants.*;
 
 public class CurrencyCalculatorWithInvalidDataTest extends BaseTest {
-    AcceptCookiesSteps acceptCookiesSteps;
     NavigationSteps navigationSeps;
     BurgerMenuSteps burgerMenuSteps;
     CurrencyCalculateSteps currencyCalculateSteps;
 
     @BeforeClass
     public void innerSetUp(){
-        acceptCookiesSteps = new AcceptCookiesSteps();
         navigationSeps = new NavigationSteps();
         burgerMenuSteps = new BurgerMenuSteps();
         currencyCalculateSteps = new CurrencyCalculateSteps();
@@ -28,8 +26,6 @@ public class CurrencyCalculatorWithInvalidDataTest extends BaseTest {
             description = "ვალუტის კურსის გვერდზე გადასვლა"
     )
     public void navigateToCurrencyRatesPage() {
-        acceptCookiesSteps.acceptCookies();
-
         String currencyText = isMobile
                 ? CURRENCY_RATES_MOBILE_TEXT
                 : CURRENCY_RATES_TEXT;

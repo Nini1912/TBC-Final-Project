@@ -13,14 +13,12 @@ import static ge.tbc.testautomation.data.Constants.*;
 
 @Description("SCRUM-T5")
 public class SearchBranchWithValidDataTest extends BaseTest {
-    AcceptCookiesSteps acceptCookiesSteps;
     NavigationSteps navigationSteps;
     BurgerMenuSteps burgerMenuSteps;
     LocationsSearchSteps locationsSearchSteps;
 
     @BeforeClass
     public void innerSetUp() {
-        acceptCookiesSteps = new AcceptCookiesSteps();
         navigationSteps = new NavigationSteps();
         burgerMenuSteps = new BurgerMenuSteps();
         locationsSearchSteps = new LocationsSearchSteps();
@@ -31,7 +29,6 @@ public class SearchBranchWithValidDataTest extends BaseTest {
             description = "მისამართების გვერდზე გადასვლა"
     )
     public void navigateToAddressesPage() {
-        acceptCookiesSteps.acceptCookies();
         if (isMobile) {
             burgerMenuSteps.openBurgerMenu()
                     .navigateToPage(LOCATIONS_TEXT)
@@ -43,7 +40,6 @@ public class SearchBranchWithValidDataTest extends BaseTest {
         }
     }
 
-    @Retry(count = 2)
     @Test(
             priority = 2,
             description = "'ფილიალები' ტაბის არჩევა"

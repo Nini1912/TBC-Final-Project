@@ -4,7 +4,6 @@ import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Selectors.byTagAndText;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$x;
 
 public class HeaderMenuPage extends CommonPage {
     public SelenideElement forMeMenu = $(byTagAndText("button", "ჩემთვის"));

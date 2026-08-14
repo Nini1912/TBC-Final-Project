@@ -17,7 +17,6 @@ public class LoanCalculatorWithNonvalidDataTest extends BaseTest {
     private String originalWindow;
     private String calculatorWindow;
 
-    AcceptCookiesSteps acceptCookiesSteps;
     NavigationSteps navigationSeps;
     BurgerMenuSteps burgerMenuSteps;
     LoanCalculateSteps loanCalculateSteps;
@@ -26,7 +25,6 @@ public class LoanCalculatorWithNonvalidDataTest extends BaseTest {
     public void innerSetUp() {
         originalWindow = WebDriverRunner.getWebDriver().getWindowHandle();
 
-        acceptCookiesSteps = new AcceptCookiesSteps();
         navigationSeps = new NavigationSteps();
         burgerMenuSteps = new BurgerMenuSteps();
         loanCalculateSteps = new LoanCalculateSteps();
@@ -34,7 +32,6 @@ public class LoanCalculatorWithNonvalidDataTest extends BaseTest {
 
     @Test(priority = 1, description = "ნავიგაციის ბარიდან სესხების გვერდზე გადასვლა")
     public void navigateToLoansPage() {
-        acceptCookiesSteps.acceptCookies();
         if (isMobile) {
             burgerMenuSteps.openBurgerMenu()
                     .navigateToPage(LOANS_TEXT)
@@ -46,20 +43,18 @@ public class LoanCalculatorWithNonvalidDataTest extends BaseTest {
         }
     }
 
-    @Retry(count = 2)
+//    @Retry(count = 2)
     @Test(priority = 2, description = "სესხის კალკულატორის გვერდზე გადასვლა")
     public void openLoanCalculator() {
         loanCalculateSteps.openNewTab(calculatorWindow);
         acceptCookiesSteps.acceptCookiesOnNewTab();
     }
 
-    @Retry(count = 2)
     @Test(priority = 3, description = "დარწმუნება, რომ 'სესხის თანხით' ტაბი აქტიურია")
     public void verifyLoanAmountTabIsActive() {
         loanCalculateSteps.btnIsActive(LOANS_TAB_ERROR_MESSAGE);
     }
 
-    @Retry(count = 2)
     @Test(
             priority = 4,
             description = "არასწორი სესხის თანხის შეყვანა"
@@ -69,7 +64,6 @@ public class LoanCalculatorWithNonvalidDataTest extends BaseTest {
                 .validateLoanTermLimits(INVALID_LOAN_REQUESTED_AMOUNT);
     }
 
-    @Retry(count = 2)
     @Test(
             priority = 5,
             description = "არასწორი სესხის ვადის არჩევა"
@@ -79,7 +73,6 @@ public class LoanCalculatorWithNonvalidDataTest extends BaseTest {
                 .verifyLoanLimits(INVALID_LOAN_PERIOD);
     }
 
-    @Retry(count = 2)
     @Test(priority = 6, description = "გამოთვლილი მონაცემების შემოწმება")
     public void verifyCalculatedData() {
         loanCalculateSteps.verifyCalculatedMonthlyPayment(LOANS_MONTHLY_PAYMENT_ERROR_MESSAGE);
