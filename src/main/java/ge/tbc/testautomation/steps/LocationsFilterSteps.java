@@ -35,7 +35,7 @@ public class LocationsFilterSteps {
     }
 
     public LocationsFilterSteps validateFilterIsAppended(){
-        locationsPage.items.first().shouldBe(visible);.
+        locationsPage.items.first().shouldBe(visible);
         return this;
     }
 
