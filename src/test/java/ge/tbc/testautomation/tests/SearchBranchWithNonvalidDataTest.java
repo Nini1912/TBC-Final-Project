@@ -1,6 +1,5 @@
 package ge.tbc.testautomation.tests;
 
-import ge.tbc.testautomation.steps.AcceptCookiesSteps;
 import ge.tbc.testautomation.steps.BurgerMenuSteps;
 import ge.tbc.testautomation.steps.LocationsSearchSteps;
 import ge.tbc.testautomation.steps.NavigationSteps;
@@ -40,6 +39,7 @@ public class SearchBranchWithNonvalidDataTest extends BaseTest {
         }
     }
 
+    @Retry(count = 2)
     @Test(
             priority = 2,
             description = "'ფილიალები' ტაბის არჩევა"
@@ -47,7 +47,7 @@ public class SearchBranchWithNonvalidDataTest extends BaseTest {
     public void selectBranchesTab() {
         acceptCookiesSteps.acceptCookiesOnNewTab();
         locationsSearchSteps.selectBranchesTab()
-                .validateTabIsActive(BRANCHES_INACTIVE_ERROR_MESSAGE);
+                .validateTabIsActive(BLUE, BRANCHES_INACTIVE_ERROR_MESSAGE);
     }
 
     @Test(

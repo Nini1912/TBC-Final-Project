@@ -1,9 +1,9 @@
 package ge.tbc.testautomation.tests;
 
-import ge.tbc.testautomation.steps.AcceptCookiesSteps;
 import ge.tbc.testautomation.steps.BurgerMenuSteps;
 import ge.tbc.testautomation.steps.LocationsFilterSteps;
 import ge.tbc.testautomation.steps.NavigationSteps;
+import ge.tbc.testautomation.util.Retry;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -44,6 +44,7 @@ public class LocationsFilterTest extends BaseTest {
         };
     }
 
+    @Retry(count = 2)
     @Test(priority = 2, dataProvider = "filterCombinations")
     public void applyAndValidateFilters(boolean apply247, boolean applyOpen) {
         locationsFilterSteps.resetFilters();

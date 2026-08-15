@@ -3,6 +3,7 @@ package ge.tbc.testautomation.tests;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
 import ge.tbc.testautomation.steps.AcceptCookiesSteps;
+import ge.tbc.testautomation.steps.SurveyPopupSteps;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -17,6 +18,7 @@ import static ge.tbc.testautomation.data.Constants.MOBILE_RESOLUTION;
 public class BaseTest {
     protected boolean isMobile;
     AcceptCookiesSteps acceptCookiesSteps;
+    SurveyPopupSteps surveyPopupSteps;
 
     @BeforeClass
     @Parameters("resolution")
@@ -40,13 +42,14 @@ public class BaseTest {
                         Integer.parseInt(dimensions[1])
                 ));
         acceptCookiesSteps = new AcceptCookiesSteps();
+        surveyPopupSteps = new SurveyPopupSteps();
     }
 
     @BeforeMethod
     public void methodSetUp(){
         acceptCookiesSteps.acceptCookies();
+        surveyPopupSteps.dismissIfPresent();
     }
-
     @AfterClass
     public void tearDown() {
         closeWebDriver();

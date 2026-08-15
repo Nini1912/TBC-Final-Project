@@ -12,4 +12,9 @@ public class BurgerMenuPage {
         return $$x(String.format("//tbcx-pw-mega-menu//*[normalize-space()='%s']", linkText));
     }
     public SelenideElement textBox = $(".tbcx-pw-popular-currencies__main-title");
+    public SelenideElement getTargetLink(String pageLink){
+        return $(".tbc-accordion.tbc-accordion--custom.tbc-accordion--expanded")
+            .$("a[href='" + pageLink + "']");
+    }
+    public SelenideElement headerTitle = $("h1 .ng-star-inserted");
 }

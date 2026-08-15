@@ -1,6 +1,5 @@
 package ge.tbc.testautomation.tests;
 
-import ge.tbc.testautomation.steps.AcceptCookiesSteps;
 import ge.tbc.testautomation.steps.BurgerMenuSteps;
 import ge.tbc.testautomation.steps.LocationsSearchSteps;
 import ge.tbc.testautomation.steps.NavigationSteps;
@@ -46,7 +45,7 @@ public class SearchBranchWithValidDataTest extends BaseTest {
     )
     public void selectBranchesTab() {
         locationsSearchSteps.selectBranchesTab()
-                .validateTabIsActive(BRANCHES_INACTIVE_ERROR_MESSAGE);
+                .validateTabIsActive(BLUE, BRANCHES_INACTIVE_ERROR_MESSAGE);
     }
 
     @Test(
@@ -58,7 +57,7 @@ public class SearchBranchWithValidDataTest extends BaseTest {
                 .validateCityFound(VALID_CITY);
     }
 
-    @Retry(count = 2)
+    @Retry(count = 3)
     @Test(
             priority = 4,
             description = "ლოკაციის არჩევა"

@@ -1,6 +1,5 @@
 package ge.tbc.testautomation.steps;
 
-import com.codeborne.selenide.conditions.Or;
 import ge.tbc.testautomation.pages.TbcCardPage;
 
 import static com.codeborne.selenide.Condition.visible;

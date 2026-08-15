@@ -21,7 +21,7 @@ public class LocationsSearchSteps {
         return this;
     }
 
-    public LocationsSearchSteps validateTabIsActive(String errorMessage){
+    public LocationsSearchSteps validateTabIsActive(String color,String errorMessage){
         SelenideElement tabParent =
                 locationsPage.branchesTab.parent();
 
@@ -36,7 +36,7 @@ public class LocationsSearchSteps {
                 );
 
         Assert.assertTrue(
-                afterBorderColor.contains("0, 173, 238"),
+                afterBorderColor.contains(color),
                 errorMessage +
                         "Underline color: " + afterBorderColor
         );

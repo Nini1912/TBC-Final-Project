@@ -3,8 +3,6 @@ package ge.tbc.testautomation.steps;
 import com.codeborne.selenide.ClickOptions;
 import ge.tbc.testautomation.pages.BurgerMenuPage;
 
-import java.util.List;
-
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
@@ -22,30 +20,11 @@ public class BurgerMenuSteps {
         return this;
     }
 
-    public BurgerMenuSteps verifyLinks (){
-        List<String> expectedLinks = List.of(
-                "ჩემთვის",
-                "სესხები",
-                "ბარათები",
-                "ანაბრები",
-                "ციფრული სერვისები",
-                "სხვა პროდუქტები",
-                "კონცეპტი",
-                "ახალი თაობისთვის",
-                "ემიგრანტებისთვის",
-                "ექსპატებისთვის",
-                "ვალუტის კურსები",
-                "შეთავაზებები",
-                "ერთგულება",
-                "მისამართები"
-        );
-
-        for (String linkText : expectedLinks) {
-            $$x("//tbcx-pw-mega-menu//*[normalize-space()='" + linkText + "']")
-                    .filterBy(visible)
-                    .first()
-                    .shouldBe(visible);
-        }
+    public BurgerMenuSteps verifyLinkIsVisible(String linkText){
+        burgerMenuPage.getLink(linkText)
+                .filterBy(visible)
+                .first()
+                .shouldBe(visible);
 
         return this;
     }
@@ -72,15 +51,14 @@ public class BurgerMenuSteps {
     }
 
     public BurgerMenuSteps navigateToSubPage(String pageLink){
-        $(".tbc-accordion.tbc-accordion--custom.tbc-accordion--expanded")
-                .$(String.format("a[href='%s']", pageLink))
+        burgerMenuPage.getTargetLink(pageLink)
                 .shouldBe(visible)
                 .click(ClickOptions.usingJavaScript());
         return this;
     }
 
     public BurgerMenuSteps validateTbcCardPage(){
-        $("h1 .ng-star-inserted").shouldBe(visible);
+        burgerMenuPage.headerTitle.shouldBe(visible);
         return this;
     }
 }

@@ -1,21 +1,17 @@
 package ge.tbc.testautomation.steps;
 
-import com.codeborne.selenide.SelenideElement;
 import ge.tbc.testautomation.pages.CurrencyCalculatorPage;
 import org.testng.Assert;
 
 import static com.codeborne.selenide.ClickOptions.usingJavaScript;
 import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.byId;
-import static com.codeborne.selenide.Selenide.$;
 
 public class CurrencyCalculateSteps {
     CurrencyCalculatorPage currencyCalculatorPage = new CurrencyCalculatorPage();
 
     public CurrencyCalculateSteps validateDropDownsNumber (){
         currencyCalculatorPage.currencyDropdowns.shouldHave(size(2));
-
         return this;
     }
 
@@ -156,7 +152,7 @@ public class CurrencyCalculateSteps {
     public CurrencyCalculateSteps selectSellCurrencyMobile (String currencyCode){
         currencyCalculatorPage.currencyDropdowns.get(0)
                 .shouldBe(visible)
-                .click(usingJavaScript()); // Bypass interception using JS click
+                .click(usingJavaScript());
 
         currencyCalculatorPage.currenciesList
                 .filterBy(text(currencyCode))
@@ -170,7 +166,7 @@ public class CurrencyCalculateSteps {
     public CurrencyCalculateSteps selectBuyCurrencyMobile (String currencyCode){
         currencyCalculatorPage.currencyDropdowns.get(1)
                 .shouldBe(visible)
-                .click(usingJavaScript()); // Bypass interception using JS click
+                .click(usingJavaScript());
 
         currencyCalculatorPage.currenciesList
                 .filterBy(text(currencyCode))

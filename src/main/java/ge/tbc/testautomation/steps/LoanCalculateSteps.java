@@ -14,7 +14,7 @@ import static com.codeborne.selenide.Condition.*;
 public class LoanCalculateSteps {
     LoansCalculatorPage loansCalculatorPage = new LoansCalculatorPage();
 
-    public LoanCalculateSteps openNewTab(String calculatorWindow){
+    public LoanCalculateSteps openNewTab(String calculatorWindow, String errorMessage){
         String oldWindow = WebDriverRunner.getWebDriver().getWindowHandle();
         Set<String> oldWindows = WebDriverRunner.getWebDriver().getWindowHandles();
 
@@ -40,21 +40,19 @@ public class LoanCalculateSteps {
 
         Assert.assertNotNull(
                 calculatorWindow,
-                "სესხის კალკულატორის ახალი tab არ გაიხსნა"
+                errorMessage
         );
-
-//        $("body").shouldBe(visible);
 
         return this;
     }
 
-    public LoanCalculateSteps btnIsActive(String errorMessage){
+    public LoanCalculateSteps btnIsActive(String color, String errorMessage){
         loansCalculatorPage.byLoanAmount.shouldBe(visible);
 
         String backgroundColor = loansCalculatorPage.byLoanAmount.getCssValue("background-color");
 
         Assert.assertTrue(
-                backgroundColor.contains("255, 255, 255"),
+                backgroundColor.contains(color),
                 errorMessage
                         + backgroundColor
         );

@@ -1,11 +1,9 @@
 package ge.tbc.testautomation.tests;
 
 import com.codeborne.selenide.WebDriverRunner;
-import ge.tbc.testautomation.steps.AcceptCookiesSteps;
 import ge.tbc.testautomation.steps.BurgerMenuSteps;
 import ge.tbc.testautomation.steps.LoanCalculateSteps;
 import ge.tbc.testautomation.steps.NavigationSteps;
-import ge.tbc.testautomation.util.Retry;
 import jdk.jfr.Description;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -35,7 +33,7 @@ public class LoanCalculatorWithValidDataTest extends BaseTest {
         if (isMobile) {
             burgerMenuSteps.openBurgerMenu()
                     .navigateToPage(LOANS_TEXT)
-                    .navigateToSubPage("/ka/loans");
+                    .navigateToSubPage(SUB_LINK_LOANS);
         } else {
             navigationSeps.navigateToForMe()
                     .navigateToLoans()
@@ -43,16 +41,15 @@ public class LoanCalculatorWithValidDataTest extends BaseTest {
         }
     }
 
-//   @Retry(count = 2)
     @Test(priority = 2, description = "სესხის კალკულატორის გვერდზე გადასვლა")
     public void openLoanCalculator() {
-        loanCalculateSteps.openNewTab(calculatorWindow);
+        loanCalculateSteps.openNewTab(calculatorWindow, LOANS_CALCULATOR_ERROR_MESSAGE);
         acceptCookiesSteps.acceptCookiesOnNewTab();
     }
 
     @Test(priority = 3, description = "დარწმუნება, რომ 'სესხის თანხით' ტაბი აქტიურია")
     public void verifyLoanAmountTabIsActive() {
-        loanCalculateSteps.btnIsActive(LOANS_TAB_ERROR_MESSAGE);
+        loanCalculateSteps.btnIsActive(WHITE, LOANS_TAB_ERROR_MESSAGE);
     }
 
     @Test(priority = 4, description = "სესხის თანხის შეყვანა")

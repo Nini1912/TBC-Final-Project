@@ -1,7 +1,8 @@
 package ge.tbc.testautomation.tests;
 
-import ge.tbc.testautomation.steps.AcceptCookiesSteps;
+import ge.tbc.testautomation.data.LinkDataProvider;
 import ge.tbc.testautomation.steps.BurgerMenuSteps;
+import ge.tbc.testautomation.util.Retry;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -30,12 +31,15 @@ public class BurgerMenuTest extends BaseTest{
        burgerMenuSteps.openBurgerMenu();
     }
 
+    @Retry(count = 2)
     @Test(
             priority = 2,
-            description = "ძირითადი ლინკების შემოწმება"
+            description = "ძირითადი ლინკების შემოწმება",
+            dataProvider = "LinkDataProvider",
+            dataProviderClass = LinkDataProvider.class
     )
-    public void verifyMainNavigationLinks() {
-        burgerMenuSteps.verifyLinks();
+    public void verifyMainNavigationLinks(String linkText) {
+        burgerMenuSteps.verifyLinkIsVisible(linkText);
     }
 
     @Test(

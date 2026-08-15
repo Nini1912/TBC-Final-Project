@@ -1,11 +1,8 @@
 package ge.tbc.testautomation.tests;
 
-import ge.tbc.testautomation.data.LinkDataProvider;
-import ge.tbc.testautomation.steps.AcceptCookiesSteps;
 import ge.tbc.testautomation.steps.BurgerMenuSteps;
 import ge.tbc.testautomation.steps.NavigationSteps;
 import ge.tbc.testautomation.steps.OrderCardSteps;
-import ge.tbc.testautomation.util.Retry;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -26,14 +23,12 @@ public class TbcCardOrderStartTest extends BaseTest {
     @Test(
             priority = 1,
             description = "თიბისი ბარათის გვერდზე გადასვლა"
-//            dataProvider = "LinkDataProvider",
-//            dataProviderClass = LinkDataProvider.class
     )
     public void navigateToTbcCardPage() {
         if (isMobile) {
             burgerMenuSteps.openBurgerMenu()
-                    .navigateToPage("ბარათები")
-                    .navigateToSubPage("/ka/tbc-card")
+                    .navigateToPage(SUB_LINK_TBC_CARD_TEXT)
+                    .navigateToSubPage(SUB_LINK_TBC_CARD)
                     .validateTbcCardPage();
         } else {
             navigationSteps.navigateToForMe()

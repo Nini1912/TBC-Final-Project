@@ -1,10 +1,8 @@
 package ge.tbc.testautomation.tests;
 
-import ge.tbc.testautomation.steps.AcceptCookiesSteps;
 import ge.tbc.testautomation.steps.BurgerMenuSteps;
 import ge.tbc.testautomation.steps.CurrencyCalculateSteps;
 import ge.tbc.testautomation.steps.NavigationSteps;
-import ge.tbc.testautomation.util.Retry;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
