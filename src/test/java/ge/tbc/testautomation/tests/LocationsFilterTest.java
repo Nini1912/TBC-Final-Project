@@ -58,8 +58,9 @@ public class LocationsFilterTest extends BaseTest {
         if (applyOpen) {
             acceptCookiesSteps.acceptCookiesOnNewTab();
             locationsFilterSteps.appendOpenFilter()
-                    .validateFilterIsAppended()
-                    .validateOpenFilterWorks();
+                    .validateFilterIsAppended();
+            surveyPopupSteps.dismissIfPresent();
+            locationsFilterSteps.validateOpenFilterWorks();
         }
     }
 }
